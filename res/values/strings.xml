@@ -4569,4 +4569,7 @@
     <string name="safe_headset_waiver_title">Waiver</string>
     <string name="safe_headset_waiver_body">Changing this setting may be against your state or government laws.\n\nIn selecting \'OK\' below, you acknowledge this warning and waive, indemnify and hold harmless this ROMs developers and contributors from all legal liabilities.</string>
     <string name="ok">OK</string> 
+
+    <!-- Advanced, Device specific (DeviceParts) settings  -->
+    <string name="advanced_settings_title">Advanced</string>
 </resources>
