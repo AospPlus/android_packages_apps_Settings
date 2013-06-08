@@ -447,6 +447,20 @@
                 android:value="com.android.settings.Settings$WirelessSettingsActivity" />
         </activity>
 
+        <activity android:name="Settings$HardwareKeysActivity"
+                android:label="@string/hardware_keys_title"
+                android:taskAffinity=""
+                android:excludeFromRecents="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
+                android:value="com.android.settings.HardwareKeys" />
+            <meta-data android:name="com.android.settings.TOP_LEVEL_HEADER_ID"
+                android:resource="@id/hardware_keys" />
+        </activity>
+
         <activity android:name="Settings$DateTimeSettingsActivity"
                 android:label="@string/date_and_time"
                 android:taskAffinity=""
