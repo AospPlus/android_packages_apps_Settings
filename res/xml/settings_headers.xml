@@ -161,6 +161,13 @@
     <header android:id="@+id/system_section"
         android:title="@string/header_category_system" />
 
+    <!-- Hardware keys -->
+    <header
+        android:id="@+id/hardware_keys"
+        android:fragment="com.android.settings.HardwareKeys"
+        android:icon="@drawable/ic_settings_hardware_keys"
+        android:title="@string/hardware_keys_title" />
+
     <!-- Date & Time -->
     <header
         android:id="@+id/date_time_settings"
