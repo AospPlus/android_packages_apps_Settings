@@ -363,6 +363,7 @@
     <string name="hardware_keys_bindings_title">Key actions</string>
     <string name="hardware_keys_enable_custom_title">Enable custom actions</string>
     <string name="hardware_keys_home_long_press_title">Home key (long press)</string>
+    <string name="hardware_keys_home_double_tap_title">Home key (double tap)</string>
     <string name="hardware_keys_app_switch_press_title">App switch key</string>
     <string name="hardware_keys_app_switch_long_press_title">App switch key (long press)</string>
     <string name="hardware_keys_action_nothing">No action</string>

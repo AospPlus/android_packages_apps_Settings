@@ -34,6 +34,7 @@ public class HardwareKeys extends SettingsPreferenceFragment implements OnPrefer
     private static final String HARDWARE_KEYS_CATEGORY_BINDINGS = "hardware_keys_bindings";
     private static final String HARDWARE_KEYS_ENABLE_CUSTOM = "hardware_keys_enable_custom";
     private static final String HARDWARE_KEYS_HOME_LONG_PRESS = "hardware_keys_home_long_press";
+    private static final String HARDWARE_KEYS_HOME_DOUBLE_TAP = "hardware_keys_home_double_tap";
     private static final String HARDWARE_KEYS_APP_SWITCH_PRESS = "hardware_keys_app_switch_press";
     private static final String HARDWARE_KEYS_APP_SWITCH_LONG_PRESS = "hardware_keys_app_switch_long_press";
 
@@ -49,6 +50,7 @@ public class HardwareKeys extends SettingsPreferenceFragment implements OnPrefer
 
     private CheckBoxPreference mEnableCustomBindings;
     private ListPreference mHomeLongPressAction;
+    private ListPreference mHomeDoubleTapAction;
     private ListPreference mAppSwitchPressAction;
     private ListPreference mAppSwitchLongPressAction;
 
@@ -63,6 +65,8 @@ public class HardwareKeys extends SettingsPreferenceFragment implements OnPrefer
                 HARDWARE_KEYS_ENABLE_CUSTOM);
         mHomeLongPressAction = (ListPreference) prefSet.findPreference(
                 HARDWARE_KEYS_HOME_LONG_PRESS);
+        mHomeDoubleTapAction = (ListPreference) prefSet.findPreference(
+                HARDWARE_KEYS_HOME_DOUBLE_TAP);
         mAppSwitchPressAction = (ListPreference) prefSet.findPreference(
                 HARDWARE_KEYS_APP_SWITCH_PRESS);
         mAppSwitchLongPressAction = (ListPreference) prefSet.findPreference(
@@ -76,6 +80,13 @@ public class HardwareKeys extends SettingsPreferenceFragment implements OnPrefer
             mHomeLongPressAction.setValue(Integer.toString(homeLongPressAction));
             mHomeLongPressAction.setSummary(mHomeLongPressAction.getEntry());
             mHomeLongPressAction.setOnPreferenceChangeListener(this);
+
+            int homeDoubleTapAction;
+            homeDoubleTapAction = Settings.System.getInt(getContentResolver(),
+                    Settings.System.KEY_HOME_DOUBLE_TAP_ACTION, ACTION_NOTHING);
+            mHomeDoubleTapAction.setValue(Integer.toString(homeLongPressAction));
+            mHomeDoubleTapAction.setSummary(mHomeLongPressAction.getEntry());
+            mHomeDoubleTapAction.setOnPreferenceChangeListener(this);
 
             int appSwitchPressAction = Settings.System.getInt(getContentResolver(),
                     Settings.System.KEY_APP_SWITCH_ACTION, ACTION_MENU);
@@ -102,6 +113,14 @@ public class HardwareKeys extends SettingsPreferenceFragment implements OnPrefer
                     mHomeLongPressAction.getEntries()[index]);
             Settings.System.putInt(getContentResolver(),
                     Settings.System.KEY_HOME_LONG_PRESS_ACTION, value);
+            return true;
+        } else if (preference == mHomeDoubleTapAction) {
+            int value = Integer.valueOf((String) newValue);
+            int index = mHomeDoubleTapAction.findIndexOfValue((String) newValue);
+            mHomeDoubleTapAction.setSummary(
+                    mHomeDoubleTapAction.getEntries()[index]);
+            Settings.System.putInt(getContentResolver(),
+                    Settings.System.KEY_HOME_DOUBLE_TAP_ACTION, value);
             return true;
         } else if (preference == mAppSwitchPressAction) {
             int value = Integer.valueOf((String) newValue);
