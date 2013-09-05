@@ -84,8 +84,8 @@ public class HardwareKeys extends SettingsPreferenceFragment implements OnPrefer
             int homeDoubleTapAction;
             homeDoubleTapAction = Settings.System.getInt(getContentResolver(),
                     Settings.System.KEY_HOME_DOUBLE_TAP_ACTION, ACTION_NOTHING);
-            mHomeDoubleTapAction.setValue(Integer.toString(homeLongPressAction));
-            mHomeDoubleTapAction.setSummary(mHomeLongPressAction.getEntry());
+            mHomeDoubleTapAction.setValue(Integer.toString(homeDoubleTapAction));
+            mHomeDoubleTapAction.setSummary(mHomeDoubleTapAction.getEntry());
             mHomeDoubleTapAction.setOnPreferenceChangeListener(this);
 
             int appSwitchPressAction = Settings.System.getInt(getContentResolver(),
