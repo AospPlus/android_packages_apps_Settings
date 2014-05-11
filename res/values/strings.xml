@@ -4917,4 +4917,19 @@
     <string name="safe_headset_waiver_title">Waiver</string>
     <string name="safe_headset_waiver_body">Changing this setting may be against your state or government laws.\n\nIn selecting \'OK\' below, you acknowledge this warning and waive, indemnify and hold harmless this ROMs developers and contributors from all legal liabilities.</string>
     <string name="ok">OK</string> 
+
+    <!-- Title of the Nfc Unlock section of Security -->
+    <string name="nfc_unlock_settings_title">NFC unlock</string>
+    <!-- Summary of the Nfc Unlock feature -->
+    <string name="nfc_unlock_settings_summary">Authorize NFC tags to override the screen lock.</string>
+    <string name="nfc_unlock_settings_desc">The following NFC tags will unlock your device
+Tap an NFC tag to authorize it, long press to delete.
+Ensure NFC polling is at least set to enabled while the screen is on but locked</string>
+    <string name="nfc_unlock_tag_detected">New tag detected</string>
+    <string name="nfc_unlock_tag_name">Enter a name for this tag</string>
+    <string name="nfc_unlock_tag_exists">Tag already exists</string>
+    <string name="nfc_unlock_unnamed_tag">(Unnamed)</string>
+    <string name="nfc_unlock_remove_tag">Remove tag</string>
+    <string name="nfc_unlock_remove_tag_confirm">Remove and unauthorize selected tag?</string>
+
 </resources>

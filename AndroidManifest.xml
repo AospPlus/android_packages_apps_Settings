@@ -1770,6 +1770,7 @@
             </intent-filter>
         </activity>
 
+
         <receiver android:name=".widget.SettingsAppWidgetProvider"
                 android:label="@string/gadget_title"
                 android:exported="false"
@@ -1809,5 +1810,11 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/file_paths" />
         </provider>
+
+        <activity
+            android:name="com.android.settings.NfcUnlockSettings"
+            android:label="@string/nfc_unlock_settings_title" >
+        </activity>
+
     </application>
 </manifest>
