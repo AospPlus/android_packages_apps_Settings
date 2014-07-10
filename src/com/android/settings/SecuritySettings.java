@@ -68,6 +68,7 @@ public class SecuritySettings extends RestrictedSettingsFragment
     private static final String KEY_OWNER_INFO_SETTINGS = "owner_info_settings";
     private static final String KEY_ENABLE_WIDGETS = "keyguard_enable_widgets";
     private static final String KEY_NFC_UNLOCK = "nfc_unlock_settings";
+    private static final String KEY_MAXIMIZE_WIDGETS = "keyguard_maximize_widgets";
 
     private static final int SET_OR_CHANGE_LOCK_METHOD_REQUEST = 123;
     private static final int CONFIRM_EXISTING_FOR_BIOMETRIC_WEAK_IMPROVE_REQUEST = 124;
@@ -106,6 +107,7 @@ public class SecuritySettings extends RestrictedSettingsFragment
     private CheckBoxPreference mToggleVerifyApps;
     private CheckBoxPreference mPowerButtonInstantlyLocks;
     private CheckBoxPreference mEnableKeyguardWidgets;
+    private CheckBoxPreference mMaximizeKeyguardWidgets;
 
     private Preference mNotificationAccess;
 
@@ -265,6 +267,31 @@ public class SecuritySettings extends RestrictedSettingsFragment
                     mEnableKeyguardWidgets.setSummary("");
                 }
                 mEnableKeyguardWidgets.setEnabled(!disabled);
+            }
+        }
+
+        // Enable or disable showing lockscreen widgets maximized by default
+        mMaximizeKeyguardWidgets = (CheckBoxPreference) root.findPreference(KEY_MAXIMIZE_WIDGETS);
+        if (mMaximizeKeyguardWidgets != null) {
+            if (ActivityManager.isLowRamDeviceStatic()
+                    || mLockPatternUtils.isLockScreenDisabled()) {
+                // Widgets take a lot of RAM, so disable them on low-memory devices
+                PreferenceGroup securityCategory
+                        = (PreferenceGroup) root.findPreference(KEY_SECURITY_CATEGORY);
+                if (securityCategory != null) {
+                    securityCategory.removePreference(root.findPreference(KEY_MAXIMIZE_WIDGETS));
+                    mMaximizeKeyguardWidgets = null;
+                }
+            } else {
+                final boolean disabled = (0 != (mDPM.getKeyguardDisabledFeatures(null)
+                        & DevicePolicyManager.KEYGUARD_DISABLE_WIDGETS_ALL));
+                if (disabled) {
+                    mEnableKeyguardWidgets.setSummary(
+                            R.string.security_maximize_widgets_disabled_summary);
+                } else {
+                    mMaximizeKeyguardWidgets.setSummary("");
+                }
+                mMaximizeKeyguardWidgets.setEnabled(!disabled);
             }
         }
 
@@ -508,6 +535,10 @@ public class SecuritySettings extends RestrictedSettingsFragment
         if (mEnableKeyguardWidgets != null) {
             mEnableKeyguardWidgets.setChecked(lockPatternUtils.getWidgetsEnabled());
         }
+
+        if (mMaximizeKeyguardWidgets != null) {
+            mMaximizeKeyguardWidgets.setChecked(lockPatternUtils.getMaximizeWidgetsEnabled());
+        }
     }
 
     @Override
@@ -560,6 +591,8 @@ public class SecuritySettings extends RestrictedSettingsFragment
             lockPatternUtils.setPowerButtonInstantlyLocks(isToggled(preference));
         } else if (KEY_ENABLE_WIDGETS.equals(key)) {
             lockPatternUtils.setWidgetsEnabled(mEnableKeyguardWidgets.isChecked());
+        } else if (KEY_MAXIMIZE_WIDGETS.equals(key)) {
+            lockPatternUtils.setMaximizeWidgetsEnabled(mMaximizeKeyguardWidgets.isChecked());
         } else if (preference == mShowPassword) {
             Settings.System.putInt(getContentResolver(), Settings.System.TEXT_SHOW_PASSWORD,
                     mShowPassword.isChecked() ? 1 : 0);
