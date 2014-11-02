@@ -228,6 +228,14 @@ public class SecuritySettings extends RestrictedSettingsFragment
             }
         }
 
+        if (!getPackageManager().hasSystemFeature(PackageManager.FEATURE_NFC)) {
+            PreferenceGroup securityCategory = (PreferenceGroup)
+                    root.findPreference(KEY_SECURITY_CATEGORY);
+            if (securityCategory != null) {
+                securityCategory.removePreference(root.findPreference(KEY_NFC_UNLOCK));
+            } 
+        }
+
         // Append the rest of the settings
         addPreferencesFromResource(R.xml.security_settings_misc);
 
